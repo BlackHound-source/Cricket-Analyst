@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ipl-cricket-intelligence
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: IPL_DATA_DIR
+        value: /var/data/ipl
+      - key: MAX_UPLOAD_MB
+        value: "300"
+    disk:
+      name: ipl-data
+      mountPath: /var/data/ipl
+      sizeGB: 10
